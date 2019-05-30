@@ -30,6 +30,7 @@ Saves the following within the directory:
 * preprocessing.sh: batch file for preprocessing that is run
 * preprocessing.log: log file for preprocessing
 * cnn/: directory for output files generated
+
 Once the fits files are created, we can start the tuning script.
 
 ## Step 3: submit tuning
@@ -56,7 +57,7 @@ list of all potential trained CNNs to look through. It saves the output
 file, filter\_out.txt, within the corresponding batch({time}) file   
 
 Few parameter options for submit\_tuning.py
-* -batch\_time %s: required, provide the batch you want to search through. 
+* --batch\_time %s: required, provide the batch you want to search through. 
 (Most likely the batch last created)
 * --min\_dropout %f: minimum dropout rate for filtering (default=0.4)
 * --min\_acc %f: minimum accuracy rate for filtering (default=0.95)
