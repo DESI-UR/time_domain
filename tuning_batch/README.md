@@ -1,12 +1,12 @@
-#Workflow for Tuning
+# Workflow for Tuning
 
-##Step 1: load module & environment
+## Step 1: load module & environment
 ```
 $ module load anaconda3
-$ source activate desi\_sbenzvi\_lab
+$ source activate desi_sbenzvi_lab
 ```
 
-##Step 2: submit preprocessing script
+## Step 2: submit preprocessing script
 This will read in coadd and truth fits files, decimate and normalize
 them, partition them into x\_train, y\_train and x\_test, y\_test.
 x\_test and y\_test are 10% of the total data and used for validation.
@@ -32,7 +32,7 @@ Saves the following within the directory:
 * cnn/: directory for output files generated
 Once the fits files are created, we can start the tuning script.
 
-##Step 3: submit tuning
+## Step 3: submit tuning
 Running submit\_tuning.py will do the random search on the hyperparameters
 in parallel.
 This will submit n jobs to generate n CNNs by running 3LabelCNNTuning.py
@@ -49,7 +49,7 @@ generate, default=100
 $ python submit_tuning.py -x --noevents --num_iters 50
 ```
 
-##Step 4: Filter models
+## Step 4: Filter models
 Running filter\_models.py will serach through all of the generated CNNs 
 (the hist.json files) within the provided 'batch\_time' name and create a
 list of all potential trained CNNs to look through. It saves the output
@@ -66,7 +66,7 @@ $ python filter_models.py --batch_time "05-30_12:14:43"
 $ cat cnn/categorical/batch\(05-30_12\:14\:43\)/filter_out.txt 
 ```
 
-#Structure of cnn/ directory
+# Structure of cnn/ directory
 * cnn/categorical/: main directory
 * cnn/categorical/batch({time}): holds batch of n CNNs generated at the time 
 submit\_tuning was ran
