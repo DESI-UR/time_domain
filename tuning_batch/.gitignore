@@ -1,0 +1,6 @@
+*.fits
+*.sh
+*.log
+*.hdf5
+cnn/
+*.swp
