@@ -130,19 +130,19 @@ def preprocess_data():
 	
 	print("Pre-processing and saving data")
 	#Clean up NaN data. This was added to get rid of some warnings that were happening with arithmetic comparisons on NaN
-	rfr_ia_clean = np.array([a if ~np.isnan(a) else 0 for a in rfr_ia])
-	rfr_iip_clean = np.array([a if ~np.isnan(a) else 0 for a in rfr_iip])
+	#rfr_ia_clean = np.array([a if ~np.isnan(a) else 0 for a in rfr_ia])
+	#rfr_iip_clean = np.array([a if ~np.isnan(a) else 0 for a in rfr_iip])
 
 	#Get the data we're training on, and 3 labels for them
-	x_data = np.concatenate([standarized_hosts[:10000], standarized[rfr_ia_clean>0.9], standarized_iip[rfr_iip_clean>0.9]]).reshape(-1,400,1)
-	y_labels = np.concatenate([np.zeros(10000), np.ones(standarized[rfr_ia_clean>0.9].shape[0]), 1+np.ones(standarized_iip[rfr_iip_clean>0.9].shape[0])])
+	x_data = np.concatenate([standarized_hosts[:20000], standarized[:20000], standarized_iip[:20000]]).reshape(-1,400,1)
+	y_labels = np.concatenate([np.zeros(20000), np.ones(20000), 1+np.ones(20000)])
 	
 	x_train, x_valid, y_train, y_valid = train_test_split(x_data, y_labels, test_size=0.1, shuffle=True)	
 
-	x_train_hdu = fits.PrimaryHDU(x_data)
+	x_train_hdu = fits.PrimaryHDU(x_train)
 	x_train_hdu.writeto('x_train.fits', overwrite=True)
 
-	y_train_hdu = fits.PrimaryHDU(y_labels)
+	y_train_hdu = fits.PrimaryHDU(y_train)
 	y_train_hdu.writeto('y_train.fits', overwrite=True)
 
 	x_test_hdu = fits.PrimaryHDU(x_valid)
