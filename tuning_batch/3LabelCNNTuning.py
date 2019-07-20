@@ -66,10 +66,10 @@ def load_data():
 	h = fits.open('y_train.fits')
 	y_train_ = h[0].data
 	h.close()
-	h = fits.open('x_test.fits')
+	h = fits.open('x_valid.fits')
 	x_test_ = h[0].data
 	h.close()
-	h = fits.open('y_test.fits')
+	h = fits.open('y_valid.fits')
 	y_test_ = h[0].data
 	h.close()
 	
@@ -112,7 +112,7 @@ def main():
 	x_train, x_test, y_train, y_test = load_data()
 
 	#create directory for specific model
-	basedir = '/scratch/dgandhi/desi/time_domain/tuning_batch/cnn/categorical/batch({})/iter({})_run({})'.format(args.batch_time,args.upper_iter,args.run_time)
+	basedir = '/scratch/dgandhi/desi/time-domain-bkup/tuning_batch_v2/cnn/categorical/batch({})/iter({})_run({})'.format(args.batch_time,args.upper_iter,args.run_time)
 	os.makedirs(basedir, exist_ok=True)
 	callbacks_ = []
 
@@ -140,7 +140,7 @@ def main():
 	history = model.fit(x=x_train, y=y_train, validation_data=(x_test,y_test), batch_size=args.bsize, epochs=args.epochs,shuffle=True, callbacks=callbacks_, verbose=2)
 	
 	params = {'batch_time': args.batch_time, 'run_time':args.run_time, 'upper_iter': args.upper_iter, 'reg':args.reg, 'dropout':args.dropout,
-	'epochs':args.epochs, 'batch_size':args.bsize}
+	'epochs':args.epochs, 'batch_size':args.bsize, 'lr':args.lr}
 	params.update(history.history)
 	#Print to file
 	with open("/".join([basedir, 'hist.json']), 'w') as f:

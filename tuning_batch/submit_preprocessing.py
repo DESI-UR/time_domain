@@ -13,7 +13,7 @@ parser.add_argument('-x', '--execute', dest='execute', action='store_true',
 args = parser.parse_args()
 
 #Main Directory of everything. Change if workspace changes
-basedir = '/scratch/dgandhi/desi/time_domain/tuning_batch'
+basedir = '/scratch/dgandhi/desi/time-domain-bkup/tuning_batch_v2'
 
 # Slurm and Log file names, based on iteration number and runtime
 slurmfile = '/'.join([basedir, 'preprocess.sh'])
@@ -22,11 +22,11 @@ logfile = '/'.join([basedir, 'preprocess.log'])
 # Write the sbatch script.
 sbatch_script = [
 	'#!/bin/bash',
-	'#SBATCH --partition=standard --time=20:00:00 --mem=24G --output={}'.format(logfile),
+	'#SBATCH --partition=standard --time=20:00:00 --mem=30G --output={}'.format(logfile),
 	'date',
 	'hostname',
 	'source /scratch/sbenzvi_lab/desi/setup_desi_software.sh',
-	'cd /scratch/dgandhi/desi/time_domain/tuning_batch',
+	'cd /scratch/dgandhi/desi/time-domain-bkup/tuning_batch_v2',
 	'python preprocess_data.py',
 	'date'
 ]

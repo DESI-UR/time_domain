@@ -16,7 +16,7 @@ parser.add_argument('--noevents', action='store_true', default=False,\
   help="If not provided, tensorboard event files are saved")
 parser.add_argument('--noweights', action='store_true', default=False,\
   help="If not provided, weight hdf5 are saved")
-parser.add_argument('--num_iters', type=int, default=50,\
+parser.add_argument('--num_iters', type=int, default=100,\
   help="Number of iterations to run")
 args = parser.parse_args()
 
@@ -45,11 +45,11 @@ niter = args.num_iters
 for i in range(niter):
 	#Hyper-parameters to search for
 	#TODO: Start limiting search space?
-	lr = np.random.uniform(10**-5, 8**-5) #np.random.uniform(8**-6, 9**-5)
-	reg = np.random.uniform(10**-6, 10**-4)# 10**(np.random.rand()*(-4)-1)
-	dropout = 0.5 #np.random.rand()*0.4 + 0.20 # [0.20, 0.65]
-	epochs = 75
-	bsize = 16 #np.random.choice([16,32,64,128], 1)[0]
+	lr = 10**(np.random.rand()*(-4)-2)
+	reg = 10**(np.random.rand()*(-4)-1)
+	dropout = np.random.rand()
+	epochs = np.random.choice([75,100,125],1)[0]
+	bsize = np.random.choice([16,32,64,128], 1)[0]
 
 	# Model name is the time we start the training	
 	ct = datetime.now().strftime("%m-%d_%H:%M:%S_%f")
