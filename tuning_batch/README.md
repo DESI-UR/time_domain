@@ -57,14 +57,14 @@ list of all potential trained CNNs to look through. It saves the output
 file, filter\_out.txt, within the corresponding batch({time}) file   
 
 Few parameter options for submit\_tuning.py
-* --batch\_time %s: required, provide the batch you want to search through. 
+* --batch\_dir %s: required, provide the batch you want to search through. 
 (Most likely the batch last created)
-* --min\_dropout %f: minimum dropout rate for filtering (default=0.4)
-* --min\_acc %f: minimum accuracy rate for filtering (default=0.95)
+* --max\_dropout %f: maximum dropout rate for filtering (default=0.4)
+* --min\_acc %f: minimum val accuracy rate for filtering (default=0.95)
 * --output\_file %s: name of output file, default= "filter\_out.txt"
 ```
-$ python filter_models.py --batch_time "05-30_12:14:43"
-$ cat cnn/categorical/batch\(05-30_12\:14\:43\)/filter_out.txt 
+$ python filter_models.py --batch_time "./directory/of/batch/file"
+$ cat cnn/categorical/batch\(batch_time\)/filter_out.txt 
 ```
 
 # Structure of cnn/ directory
